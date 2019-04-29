@@ -12,7 +12,7 @@
 // list([])
 // // returns ''
 
-//my answer:
+//my solution:
 function list(names){
     let string = ''
     names.forEach((val,i,arr)=>{
@@ -48,7 +48,7 @@ function list(names){
 anagrams('laser', ['lazing', 'lazy',  'lacer']) 
 //=> []
 
-//my answer:
+//my solution:
 
 function anagrams(word, words) {
   let anagramArray = []
@@ -72,7 +72,7 @@ function anagrams(word, words) {
 }
 
 //_________________________________________________________________________________________________________________
- 
+//6 kyu
 //There is an array with some numbers. All numbers are equal except for one. Try to find it!
 
 //findUniq([ 1, 1, 1, 2, 1, 1 ]) === 2
@@ -97,14 +97,14 @@ function findUniq(arr) {
 
 
 //_________________________________________________________________________________________________________________
-
+//5 kyu
 //ticTacToe
 //0 = empty
 //1 = X
 //2 = O
 
 //take in an array of three arrays, return -1 if game is not finished, 1 if X wins, 2 if O wins or 0 if cat's game
-
+//my solution:
 function ticTacToe(array){
   let winner
   //test for horizontal matches
