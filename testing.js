@@ -3,35 +3,6 @@
 //1 = X
 //2 = O
 
-const newGame = [
-    [0,0,0],
-    [0,0,0],
-    [0,0,0]
-]
-const unfinishedGame = [
-    [0,0,1],
-    [2,1,0],
-    [0,2,0]
-]
-const xWinsGame = [
-    [0,0,1],
-    [2,1,0],
-    [1,2,0]
-]
-const oWinsGame = [
-    [0,2,1],
-    [2,2,1],
-    [1,2,0]
-]
-const catsGame = [
-    [1,2,1],
-    [2,2,1],
-    [1,1,2]
-]
-
-// console.log({newGame}, {unfinishedGame}, {xWinsGame}, {oWinsGame}, {catsGame})
-
-
 //take in an array of three arrays, return -1 if game is not finished, 1 if X wins, 2 if O wins or 0 if cat's game
 
 function winCheck(array){
@@ -94,6 +65,31 @@ function winCheck(array){
 }
 
 
+const newGame = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,0]
+]
+const unfinishedGame = [
+    [0,0,1],
+    [2,1,0],
+    [0,2,0]
+]
+const xWinsGame = [
+    [0,0,1],
+    [2,1,0],
+    [1,2,0]
+]
+const oWinsGame = [
+    [0,2,1],
+    [2,2,1],
+    [1,2,0]
+]
+const catsGame = [
+    [1,2,1],
+    [2,2,1],
+    [1,1,2]
+]
 
 const testGame = [
     [1,2,1],
@@ -101,4 +97,4 @@ const testGame = [
     [2,1,2]
 ]
 
-console.log('winCheck',winCheck(testGame))
+console.log('winCheck',winCheck(catsGame))
