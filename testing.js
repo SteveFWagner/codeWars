@@ -1,100 +1,66 @@
-//ticTacToe
-//0 = empty
-//1 = X
-//2 = O
+// //4kyu
+// //You have to create a function that takes a positive integer number and returns the next bigger number formed by the same digits:
 
-//take in an array of three arrays, return -1 if game is not finished, 1 if X wins, 2 if O wins or 0 if cat's game
+// function nextBigger(num){
+//     const numArray = num.toString().split('').map(num => {
+//         return Number(num)
+//     })
+//     console.log(numArray)
+//     //check for single digit
+//     if(numArray.length === 1){
+//         console.log('length is one')
+//         return -1
+//     }else{
+//     //check for repeating numbers like 111
+//         let repeatCheck = true
+//         let prevNum = numArray[0]
+//         numArray.forEach(num => {
+//             if(num === prevNum){
+//                 prevNum = num
+//                 // console.log('hit')
+//             }else {
+//                 repeatCheck = false
+//                 // console.log('hit2')
+//             }
+//         })
+//         // console.log({prevNum})
+//         // console.log({repeatCheck})
+//         if(repeatCheck === true){
+//             return -1
+//         }else{
+//             //check for next biggest number if possible
+//             const revArray = numArray.reverse()
+//             let lowestDiff = num*num
+//             let answer
+//             revArray.forEach((number,i,arr)=>{
+//                 const revArrayCopy = [...revArray]
+//                 let testNum = number
+//                 let nextNum = arr[i+1]
+//                 if((i+1) !== arr.length){
+//                     revArrayCopy[i] = nextNum
+//                     revArrayCopy[i+1] = testNum
+//                     console.log({revArrayCopy})
+//                     let newNum = Number(revArrayCopy.reverse().join(''))
+//                     console.log(newNum)
+//                     let diff = newNum - num
+//                     console.log({diff})
+//                     if(diff < lowestDiff && diff > 0){
+//                         lowestDiff = diff
+//                         answer = newNum
+//                         console.log({lowestDiff})
+//                     }
+//                 }
+//             })
+//             console.log({answer})
+//             if(answer){
+//                 return answer
+//             }else{
+//                 return -1
+//             }
+//         }
+//     }
 
-function winCheck(array){
-    let winner
-    //test for horizontal matches
-    array.forEach(val => {
-        if(val[0] === val[1] && val[1] === val[2]){
-            if (val[0] !== 0){
-                console.log('horizontal winner',val[0])
-                winner = val[0]
-            }
-        }
-    })
-    //test for vertical matches
-    const rowOne = array[0]
-    const rowTwo = array[1]
-    const rowThree = array[2]
-    if(rowOne[0] === rowTwo[0] && rowTwo[0] === rowThree[0]){
-        if(rowOne[0] !== 0){
-            console.log('vertical winner',rowOne[0])
-            winner = rowOne[0]
-        }
-    }
-    if(rowOne[1] === rowTwo[1] && rowTwo[1] === rowThree[1]){
-        if(rowOne[1] !== 0){
-            console.log('vertical winner',rowOne[1])
-            winner = rowOne[1]
-        }
-    }
-    if(rowOne[2] === rowTwo[2] && rowTwo[2] === rowThree[2]){
-        if(rowOne[2] !== 0){
-            console.log('vertical winner',rowOne[2])
-            winner = rowOne[2]
-        }
-    }
-    //test for diagonal matches
-    if(rowOne[0] === rowTwo[1] && rowTwo[1] === rowThree[2]){
-        if(rowOne[0] !== 0 ){
-            console.log('diagonal winner', rowOne[0])
-            winner = rowOne[0]
-        }
-    }
-    if(rowOne[2] === rowTwo[1] && rowTwo[1] === rowThree[0]){
-        if(rowOne[2] !== 0 ){
-            console.log('diagonal winner', rowOne[2])
-            winner = rowOne[2]
-        }
-    }
-    if(winner){
-        return winner
-    } else if(rowOne.includes(0) || rowTwo.includes(0) || rowThree.includes(0)){
-        //check for unfinished game 0s on board
-        console.log('unfinished game')
-        return -1
-    } else {
-        // cats game
-        console.log('cats game')
-        return 0
-    }
-}
+//   }
 
+//   nextBigger(123)
 
-const newGame = [
-    [0,0,0],
-    [0,0,0],
-    [0,0,0]
-]
-const unfinishedGame = [
-    [0,0,1],
-    [2,1,0],
-    [0,2,0]
-]
-const xWinsGame = [
-    [0,0,1],
-    [2,1,0],
-    [1,2,0]
-]
-const oWinsGame = [
-    [0,2,1],
-    [2,2,1],
-    [1,2,0]
-]
-const catsGame = [
-    [1,2,1],
-    [2,2,1],
-    [1,1,2]
-]
-
-const testGame = [
-    [1,2,1],
-    [1,2,1],
-    [2,1,2]
-]
-
-console.log('winCheck',winCheck(catsGame))

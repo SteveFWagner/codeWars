@@ -198,3 +198,44 @@ const testGame = [
 ]
 
 console.log('ticTacToe',ticTacToe(catsGame))
+
+//_________________________________________________________________________________________________________________
+// 5kyu 
+//Write a function called that takes a string of parentheses, and determines if the order of the parentheses is valid. The function should return true if the string is valid, and false if it's invalid.
+// Examples
+// "()"              =>  true
+// ")(()))"          =>  false
+// "("               =>  false
+// "(())((()())())"  =>  true
+
+function validParentheses(parens){
+  //declaring variables to hold the number of open and closed parantheses
+  let close = 0
+  let open = 0
+  //splitting the string into an array
+  let inputArray = parens.split('')
+  console.log(inputArray)
+  //ruling out any inputs with incorrect opening or closing parentheses at the beginning and end of the string
+  if(inputArray[0] === ')'){
+    return false
+  } else if(inputArray[inputArray.length-1] === '('){
+    return false
+  }else{
+    //looping over the array to increment the variables created earlier
+    inputArray.forEach(input => {
+      if(input === ')'){
+        close = close + 1
+      }else if (input === '('){
+        open = open + 1
+      }
+    })
+    //if the open and close variables are equal, we have correct syntax. Otherwise we do not. 
+    if(open === close){
+      return true
+    } else {
+      return false
+    }
+  }
+}
+
+//
