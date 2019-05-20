@@ -1,66 +1,83 @@
-// //4kyu
-// //You have to create a function that takes a positive integer number and returns the next bigger number formed by the same digits:
+let pipeline = [
+    [1,0,1,1,0],
+    [1,0,1,0,0],
+    [0,0,1,0,0],
+    [1,0,1,1,1],
+    [1,1,0,0,1],
+  ];
+  let badPipeline = [
+    [1,0,1,1,0],
+    [1,0,1,0,0],
+    [0,0,1,0,0],
+    [1,0,0,1,1],
+    [1,1,0,0,1],
+  ];
+  let branchPipeline = [
+    [0,0,1,0,0],
+    [0,1,1,1,0],
+    [0,1,0,1,0],
+    [0,1,0,1,0],
+    [0,0,0,1,0],
+  ];
 
-// function nextBigger(num){
-//     const numArray = num.toString().split('').map(num => {
-//         return Number(num)
-//     })
-//     console.log(numArray)
-//     //check for single digit
-//     if(numArray.length === 1){
-//         console.log('length is one')
-//         return -1
-//     }else{
-//     //check for repeating numbers like 111
-//         let repeatCheck = true
-//         let prevNum = numArray[0]
-//         numArray.forEach(num => {
-//             if(num === prevNum){
-//                 prevNum = num
-//                 // console.log('hit')
-//             }else {
-//                 repeatCheck = false
-//                 // console.log('hit2')
-//             }
-//         })
-//         // console.log({prevNum})
-//         // console.log({repeatCheck})
-//         if(repeatCheck === true){
-//             return -1
-//         }else{
-//             //check for next biggest number if possible
-//             const revArray = numArray.reverse()
-//             let lowestDiff = num*num
-//             let answer
-//             revArray.forEach((number,i,arr)=>{
-//                 const revArrayCopy = [...revArray]
-//                 let testNum = number
-//                 let nextNum = arr[i+1]
-//                 if((i+1) !== arr.length){
-//                     revArrayCopy[i] = nextNum
-//                     revArrayCopy[i+1] = testNum
-//                     console.log({revArrayCopy})
-//                     let newNum = Number(revArrayCopy.reverse().join(''))
-//                     console.log(newNum)
-//                     let diff = newNum - num
-//                     console.log({diff})
-//                     if(diff < lowestDiff && diff > 0){
-//                         lowestDiff = diff
-//                         answer = newNum
-//                         console.log({lowestDiff})
-//                     }
-//                 }
-//             })
-//             console.log({answer})
-//             if(answer){
-//                 return answer
-//             }else{
-//                 return -1
-//             }
-//         }
-//     }
+  // write a function that will determine if you can get from the top to the bottom.
+  // you may only travel via 1's. You may go left and right, up and down.
+  // return true if possible, and false if not possible.
 
-//   }
+const pipeCheck = (input) => {
+    const path = []
+    const goodLayer = []
+    let answer
+    input.forEach((layer,i) => {
+        path[i] = []
+        layer.forEach((val,index) => {
+            if(val === 1){
+                path[i].push(index)
+            }
+        })
+    })
+    //starting at the bottom
+    path.reverse().forEach((layer,i,arr) => {
+        goodLayer[i] = []
+        layer.forEach((val,index,array) => {
+            if(i !== 4){
+                if(index === 0){
+                    if(arr[i+1].includes(val) || arr[i+1].includes(array[index+1])){
+                        goodLayer[i].push(true)
+                    }else{
+                        goodLayer[i].push(false)
+                    }
+                } else if(index !== 4){
+                    if(arr[i+1].includes(val) || arr[i+1].includes(array[index+1]) || arr[i+1].includes(array[index-1])){
+                        goodLayer[i].push(true)
+                    }else{
+                        goodLayer[i].push(false)
+                    }
+                }
+            }
+        })
+    })
+    const goodPipe = []
+    goodLayer.forEach((layer,i) => {
+        if(i !==4){
+            if(layer.includes(true)){
+                goodPipe[i] = true
+            }else {
+                goodPipe[i] = false
+            }
+        }
+    })
+            
+    if(goodPipe.includes(false)){
+        answer = false
+    }else {
+        answer = true
+    }
+    return answer
+}
 
-//   nextBigger(123)
+console.log(pipeCheck(branchPipeline))
 
+//badPipeline
+//branchPipeline
+//pipeline
