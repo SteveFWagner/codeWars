@@ -1,83 +1,37 @@
-let pipeline = [
-    [1,0,1,1,0],
-    [1,0,1,0,0],
-    [0,0,1,0,0],
-    [1,0,1,1,1],
-    [1,1,0,0,1],
-  ];
-  let badPipeline = [
-    [1,0,1,1,0],
-    [1,0,1,0,0],
-    [0,0,1,0,0],
-    [1,0,0,1,1],
-    [1,1,0,0,1],
-  ];
-  let branchPipeline = [
-    [0,0,1,0,0],
-    [0,1,1,1,0],
-    [0,1,0,1,0],
-    [0,1,0,1,0],
-    [0,0,0,1,0],
-  ];
-
-  // write a function that will determine if you can get from the top to the bottom.
-  // you may only travel via 1's. You may go left and right, up and down.
-  // return true if possible, and false if not possible.
-
-const pipeCheck = (input) => {
-    const path = []
-    const goodLayer = []
-    let answer
-    input.forEach((layer,i) => {
-        path[i] = []
-        layer.forEach((val,index) => {
-            if(val === 1){
-                path[i].push(index)
-            }
-        })
-    })
-    //starting at the bottom
-    path.reverse().forEach((layer,i,arr) => {
-        goodLayer[i] = []
-        layer.forEach((val,index,array) => {
-            if(i !== 4){
-                if(index === 0){
-                    if(arr[i+1].includes(val) || arr[i+1].includes(array[index+1])){
-                        goodLayer[i].push(true)
-                    }else{
-                        goodLayer[i].push(false)
-                    }
-                } else if(index !== 4){
-                    if(arr[i+1].includes(val) || arr[i+1].includes(array[index+1]) || arr[i+1].includes(array[index-1])){
-                        goodLayer[i].push(true)
-                    }else{
-                        goodLayer[i].push(false)
-                    }
-                }
-            }
-        })
-    })
-    const goodPipe = []
-    goodLayer.forEach((layer,i) => {
-        if(i !==4){
-            if(layer.includes(true)){
-                goodPipe[i] = true
-            }else {
-                goodPipe[i] = false
-            }
+function findOdd(array) {
+    let counterArray = []
+    const sortedArr = array.sort((a,b)=>a-b)
+    console.log(sortedArr)
+    let counter = 0
+    sortedArr.forEach((num,i,arr) => {
+        if(num === arr[i+1]){
+            // console.log('hit', num)
+            counter = counter + 1
+            // console.log('counter',counter)
+        } else {
+            // console.log('hit2', num)
+            counter = counter + 1
+            // console.log('counter2',counter)
+            let numObj = {}
+            numObj[num] = counter
+            counterArray.push(numObj)
+            counter = 0
         }
     })
-            
-    if(goodPipe.includes(false)){
-        answer = false
-    }else {
-        answer = true
-    }
+    // console.log(counterArray)
+    let answer
+    counterArray.forEach(numObj => {
+        // console.log(numObj)
+        if(numObj[Object.keys(numObj)[0]] % 2 === 1){
+            answer = Object.keys(numObj)[0]
+        }
+    })
+    // console.log(answer)
     return answer
 }
 
-console.log(pipeCheck(branchPipeline))
 
-//badPipeline
-//branchPipeline
-//pipeline
+// const testArray = [20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]
+// const testArray = [1,1,2,-2,5,2,4,4,-1,-2,5]
+// const testArray = [1,1,1,1,1,1,10,1,1,1,1]
+//findOdd(testArray)
